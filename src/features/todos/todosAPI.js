@@ -1,29 +1,27 @@
+import axios from "axios"
+
+const URL = import.meta.env.VITE_APP_API_URL
+
 export const getTodosAPI = function () {
-    return fetch(`https://jsonplaceholder.typicode.com/todos?_limit=10`)
-    .then(res => res.json())
+    return axios.get(`${URL}/todos?_limit=10`)
+    .then(res => res.data)
 }
 export const addTodoAPI = function (todo) {
-    return fetch(`https://jsonplaceholder.typicode.com/todos`, {
-        method: "POST",
-        body: JSON.stringify(todo),
+    return axios.post(`${URL}/todos`, todo, {
         headers: { "Content-Type": "application/json" }
     })
-    .then(res => res.json())
+    .then(res => res.data)
 }
 
 export const updateTodoAPI = function(todo) {
-    return fetch(`https://jsonplaceholder.typicode.com/todos/${todo.id}`, {
-        method: "PUT",
-        body: JSON.stringify(todo),
+    return axios.put(`${URL}/todos/${todo.id}`, todo, {
         headers: { "Content-Type": "application/json" }
     })
-    .then(res => res.json())
+    .then(res => res.data)
 }
 
 export const deleteTodoAPI = function(id) {
-    return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-        method: "DELETE"
-    })
+    return axios.delete(`${URL}/todos/${id}`)
     .then(() => id)
 }
 
