@@ -1,25 +1,42 @@
 import { useDispatch } from "react-redux"
 import { updateTodo, deleteTodo } from "../features/todos/todosSlice"
 
-function TodoItem ({ todo }) {
+function TodoItem ({ todo, savedTheme }) {
   const dispatch = useDispatch()
 
   const toggleComplete = () => {
     dispatch(updateTodo({ ...todo, completed: !todo.completed }))
   }
 
-  const handleDelete = () => {
-    dispatch(deleteTodo(todo.id));
+  const handleDelete = (e) => {
+    const todoDiv = e.target.closest('.todo')
+    todoDiv.classList.add('fall')
+    
+    todoDiv.addEventListener('transitionend', function() {
+      dispatch(deleteTodo(todo.id))
+    })
   }
   
-return (
-    <li>
-      <input type="checkbox" checked={todo.completed} onChange={toggleComplete} />
-      <span style={{ textDecoration: todo.completed ? "line-through" : "none" }}>
+  return (
+    <div className={`todo ${savedTheme}-todo ${todo.completed ? 'completed' : ''}`}>
+      <li className="todo-item">
         {todo.title}
-      </span>
-      <button onClick={handleDelete}>Delete</button>
-    </li>
+      </li>
+      
+      <button
+        onClick={toggleComplete}
+        className={`check-btn ${savedTheme}-button`}
+      >
+        <i className="fas fa-check"></i>
+      </button>
+      
+      <button
+        onClick={handleDelete}
+        className={`delete-btn ${savedTheme}-button`}
+      >
+        <i className="fas fa-trash"></i>
+      </button>
+    </div>
   )
 }
 
