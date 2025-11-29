@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Login () {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [users, setUsers] = useState([])
+    const navigate = useNavigate()
 
     const PASS = import.meta.env.VITE_APP_SECRET_PASSWORD
     const URL = import.meta.env.VITE_APP_API_URL
@@ -30,7 +32,7 @@ useEffect(() => {
         }
 
         localStorage.setItem("loggedInUser", JSON.stringify(foundUser))
-        window.location.href = "/todos"
+        navigate("/todos")
     }
 return (
         <div>
