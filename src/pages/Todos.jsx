@@ -63,14 +63,14 @@ function Todos () {
     }
 
     return (
-        <div style={{fontFamily: "'Work Sans', sans-serif"}}>
+        <div >
             <div id="header">
-                <div className="flexrow-container" style={{alignSelf: 'flex-end', marginLeft: '3%', marginRight: '0'}}>
+                <div className="flexrow-container absolute top-11.5 right-8" style={{alignSelf: 'flex-end', marginLeft: '3%', marginRight: '0'}}>
                     <div className="standard-theme theme-selector" onClick={() => changeTheme("standard")}></div>
                     <div className="light-theme theme-selector" onClick={() => changeTheme("light")}></div>
                     <div className="darker-theme theme-selector" onClick={() => changeTheme("darker")}></div>
                 </div>
-                <h1 id="title">Just do it.<div id="border"></div></h1>
+                <h1 id="title" style={{fontFamily: "'Work Sans', sans-serif", fontSize: '6rem', fontWeight: 'bold', whiteSpace: 'nowrap'}}>Just do it.</h1>
             </div>
 
             <div id="form">
